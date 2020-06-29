@@ -35,41 +35,72 @@ datapath = os.path.join('..','Resources', 'PyBank_Data.csv')
 # Read the csv data
 with open(datapath) as csvfile:
     reader = csv.reader(csvfile, delimiter=",")
+    # Skip header row
     next(reader)
 
     # Create separate lists for the date and P/Ls field
     dates = []
     profits_losses = []
+
     for row in reader:
         dates.append((row[0]))
         profits_losses.append((row[1]))
+    
+    # Stores the P&L list as integers
+    profits_losses = [int(i) for i in profits_losses]
 
-    # 1. Number of entries
+# 1. Number of entries
     no_months = len(dates)
 
-    # 2. Loop to get the net profit from all entries
+# 2. Loop to get the net profit from all entries
     net_profit = 0
     for x in profits_losses:
-        int(x)
-        net_profit += int(x)
+        net_profit += x
 
-    #3. Average Monthly Change
-    monthly_change = []
-    for i in range(len(profits_losses)):
-        int(i)
-        monthly_change[i] = row[1] -
+#3. Average Monthly Change 
+    # (referenced stackoverflow: https://stackoverflow.com/questions/2400840/finding-differences-between-elements-of-a-list)
+    monthly_change = [j - i for i , j in zip(profits_losses[:-1],profits_losses[1:])]
     
-    # length2 = len(monthly_change)
-    # print(length2)
-    # avg_profit = net_profit / no_months
+    # Total # of changes
+    num_changes = len(monthly_change)
+    
+    #loop for find the sum of all changes
+    sum_change = 0
+    for x in monthly_change:
+        sum_change += x
+    
+    avg_change = (sum_change / num_changes)
+    rd_avg = round(avg_change,2)
 
-    #4 & #5 Find the min and max profits
-        # for x in profits_losses:
-    #     if 
+#4. Find the max profit gain in a month 
+    g_inc = max(profits_losses)
+    index_g_inc = profits_losses.index(g_inc)
+    date_g_inc = dates[index_g_inc]
 
-    # 6. Print the results and write to txt file
+#5 Find the min and max profits
+    g_dec = min(profits_losses)
+    index_g_dec = profits_losses.index(g_dec)
+    date_g_dec = dates[index_g_dec]
+
+# 6. Print the results and write to txt file
+    print("----------------------------")
+    print("Financial Analysis:")
+    print("")
     print(f"Total # of Months: {str(no_months)}")
     print(f"Net Profit: ${str(net_profit)}")
-    # print(f"Average Monthly Profit: ${str(avg_profit)}")
-    # print(f"Total # of Months: {str(total_entries)}")
-    # print(f"Total # of Months: {str(total_entries)}")
+    print(f"Average Monthly Change: ${str(rd_avg)}")
+    print(f"Greatest Profit Increase: ${str(g_inc)} in {date_g_inc}")
+    print(f"Greatest Profit Decrease: ${str(g_dec)} in {date_g_dec}")
+    print ("----------------------------")
+
+    resultspath = os.path.join('..','Analysis', 'Results_hw.txt')
+    with open(resultspath , "w") as text:
+        text.write("----------------------------")
+        text.write("\nFinancial Analysis:")
+        text.write("\n")
+        text.write(f"\nTotal # of Months: {str(no_months)}")
+        text.write(f"\nNet Profit: ${str(net_profit)}")
+        text.write(f"\nAverage Monthly Change: ${str(rd_avg)}")
+        text.write(f"\nGreatest Profit Increase: ${str(g_inc)} in {date_g_inc}")
+        text.write(f"\nGreatest Profit Decrease: ${str(g_dec)} in {date_g_dec}")
+        text.write ("\n----------------------------")
