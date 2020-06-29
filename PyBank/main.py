@@ -1,27 +1,16 @@
 # PyBank: Plan of Attack
-    # Data Callouts
+    # Resource data
     #   Col1: Date | MMM-YY | Min: 1/1/2010 | Max: 2/1/2017 |
     #   Col2: Profit/Losses | +/- # | Max: 1170593 | Min: -1196225 | 
-
     
     # Deliverables:
     #   1.  The total number of months included in the dataset
-    #         Store all data into a dictionary
-    #         Use the Len function on the dict to get total entries
-      
     #   2.  The net total amount of "Profit/Losses" over the entire period
-    #         use a for loop to cycle through each entry
-    #         create a variable to store each entry
-    #         redefine the variable for each entry by add
-
     #   3.  The average of the changes in "Profit/Losses" over the entire period
-    #         Use the 2 variables above as the denominator and numerator respectively
-    
     #   4.  The greatest increase in profits (date and amount) over the entire period
     #   5.  The greatest decrease in losses (date and amount) over the entire period
-    #         need to use max/min command on a list? or dict?
-    #         Using the list command i can find what entry no. that the max was at then use
-    #         that to display
+    #   6.  Write the results to a text file. 
+
  
 
 # HW Attempt: PyBank
@@ -57,7 +46,7 @@ with open(datapath) as csvfile:
     for x in profits_losses:
         net_profit += x
 
-#3. Average Monthly Change 
+# 3. Average Monthly Change 
     # (referenced stackoverflow: https://stackoverflow.com/questions/2400840/finding-differences-between-elements-of-a-list)
     monthly_change = [j - i for i , j in zip(profits_losses[:-1],profits_losses[1:])]
     
@@ -72,12 +61,12 @@ with open(datapath) as csvfile:
     avg_change = (sum_change / num_changes)
     rd_avg = round(avg_change,2)
 
-#4. Find the max profit gain in a month 
+# 4. Find the max profit gain in a month 
     g_inc = max(profits_losses)
     index_g_inc = profits_losses.index(g_inc)
     date_g_inc = dates[index_g_inc]
 
-#5 Find the min and max profits
+# 5. Find the min and max profits
     g_dec = min(profits_losses)
     index_g_dec = profits_losses.index(g_dec)
     date_g_dec = dates[index_g_dec]
