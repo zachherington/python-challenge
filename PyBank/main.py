@@ -1,4 +1,4 @@
-# PyBank: Plan of Attack
+# PyBank Plan of Attack:
     # Resource data
     #   Col1: Date | MMM-YY | Min: 1/1/2010 | Max: 2/1/2017 |
     #   Col2: Profit/Losses | +/- # | Max: 1170593 | Min: -1196225 | 
@@ -24,8 +24,8 @@ datapath = os.path.join('..','Resources', 'PyBank_Data.csv')
 # Read the csv data
 with open(datapath) as csvfile:
     reader = csv.reader(csvfile, delimiter=",")
-    # Skip header row
-    next(reader)
+    # Store header row
+    headers = next(reader)
 
     # Create separate lists for the date and P/Ls field
     dates = []
@@ -75,11 +75,11 @@ with open(datapath) as csvfile:
     print("----------------------------")
     print("Financial Analysis:")
     print("")
-    print(f"Total # of Months: {str(no_months)}")
-    print(f"Net Profit: ${str(net_profit)}")
-    print(f"Average Monthly Change: ${str(rd_avg)}")
-    print(f"Greatest Profit Increase: ${str(g_inc)} in {date_g_inc}")
-    print(f"Greatest Profit Decrease: ${str(g_dec)} in {date_g_dec}")
+    print(f"Total # of Months: {no_months}")
+    print(f"Net Profit: ${net_profit}")
+    print(f"Average Monthly Change: ${rd_avg}")
+    print(f"Greatest Profit Increase: ${g_inc} in {date_g_inc}")
+    print(f"Greatest Profit Decrease: ${g_dec} in {date_g_dec}")
     print ("----------------------------")
 
     resultspath = os.path.join('..','Analysis', 'Results_hw.txt')
@@ -87,9 +87,9 @@ with open(datapath) as csvfile:
         text.write("----------------------------")
         text.write("\nFinancial Analysis:")
         text.write("\n")
-        text.write(f"\nTotal # of Months: {str(no_months)}")
-        text.write(f"\nNet Profit: ${str(net_profit)}")
-        text.write(f"\nAverage Monthly Change: ${str(rd_avg)}")
-        text.write(f"\nGreatest Profit Increase: ${str(g_inc)} in {date_g_inc}")
-        text.write(f"\nGreatest Profit Decrease: ${str(g_dec)} in {date_g_dec}")
+        text.write(f"\nTotal # of Months: {no_months}")
+        text.write(f"\nNet Profit: ${net_profit}")
+        text.write(f"\nAverage Monthly Change: ${rd_avg}")
+        text.write(f"\nGreatest Profit Increase: ${g_inc} in {date_g_inc}")
+        text.write(f"\nGreatest Profit Decrease: ${g_dec} in {date_g_dec}")
         text.write ("\n----------------------------")
