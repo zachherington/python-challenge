@@ -28,12 +28,12 @@ with open(datapath) as csvfile:
     # Store header row
     headers = next(reader)
 
-    # Store CSV data into
+    # Create separate lists to store data
     voter_id_all = []
     county_all = []
     candidate_all = []
 
-    # Create separate lists to store each category
+    # Append lists with column data
     for row in reader:
         voter_id_all.append((row[0]))
         county_all.append((row[1]))
@@ -57,6 +57,7 @@ with open(datapath) as csvfile:
     cand3_votes = []
     cand4_votes = []
     
+    # Store total votes for each candidate into their own lists
     for x in candidate_all:
         if x == cand1:
             cand1_votes.append(x)
@@ -67,6 +68,7 @@ with open(datapath) as csvfile:
         if x == cand4:
             cand4_votes.append(x)
     
+    # Take the length of each candidate's list to get a total # votes
     cand1_total = len(cand1_votes)
     cand2_total = len(cand2_votes)
     cand3_total = len(cand3_votes)
@@ -79,12 +81,13 @@ with open(datapath) as csvfile:
     cand4_per = round((cand4_total / total_votes) *100 , 2)
 
 # 5. Determine the election winner
+    # Dictionary to store candidate name (key) and vote total (value)
     candidate_results = {   cand1 : cand1_total, 
                             cand2 : cand2_total, 
                             cand3 : cand3_total, 
                             cand4 : cand4_total}
 
-
+    # finds the max value in candidate results and returns the Name (key)
     winner = max(candidate_results, key = candidate_results.get)
     
 
