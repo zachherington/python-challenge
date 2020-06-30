@@ -79,7 +79,14 @@ with open(datapath) as csvfile:
     cand4_per = round((cand4_total / total_votes) *100 , 2)
 
 # 5. Determine the election winner
-    winner = "TBD"
+    candidate_results = {   cand1 : cand1_total, 
+                            cand2 : cand2_total, 
+                            cand3 : cand3_total, 
+                            cand4 : cand4_total}
+
+
+    winner = max(candidate_results, key = candidate_results.get)
+    
 
 # 6. Print the results and write to txt file
     print("----------------------------")
@@ -87,7 +94,7 @@ with open(datapath) as csvfile:
     print("")
     print(f"Total Votes: {total_votes}")
     print(f"Total Candidates: {total_cand}")
-    print("")
+    print("----------------------------")
     print(f"{cand1}: {cand1_per}% with {cand1_total} votes.")
     print(f"{cand2}: {cand2_per}% with {cand2_total} votes.")
     print(f"{cand3}: {cand3_per}% with {cand3_total} votes.")
@@ -95,3 +102,19 @@ with open(datapath) as csvfile:
     print ("----------------------------")
     print(f"Winner: {winner}")
     print ("----------------------------")
+
+    resultspath = os.path.join('..','Analysis', 'Results_pypoll.txt')
+    with open(resultspath , "w") as text:
+        text.write("----------------------------")
+        text.write("\nElection Results:")
+        text.write("\n")
+        text.write(f"\nTotal Votes: {total_votes}")
+        text.write(f"\nTotal Candidates: {total_cand}")
+        text.write("\n----------------------------")
+        text.write(f"\n{cand1}: {cand1_per}% with {cand1_total} votes.")
+        text.write(f"\n{cand2}: {cand2_per}% with {cand2_total} votes.")
+        text.write(f"\n{cand3}: {cand3_per}% with {cand3_total} votes.")
+        text.write(f"\n{cand4}: {cand4_per}% with {cand4_total} votes.")
+        text.write("\n----------------------------")
+        text.write(f"\nWinner: {winner}")
+        text.write("\n----------------------------")

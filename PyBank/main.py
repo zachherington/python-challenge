@@ -82,7 +82,7 @@ with open(datapath) as csvfile:
     print(f"Greatest Profit Decrease: ${g_dec} in {date_g_dec}")
     print ("----------------------------")
 
-    resultspath = os.path.join('..','Analysis', 'Results_hw.txt')
+    resultspath = os.path.join('..','Analysis', 'Results_pybank.txt')
     with open(resultspath , "w") as text:
         text.write("----------------------------")
         text.write("\nFinancial Analysis:")
